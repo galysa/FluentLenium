@@ -21,7 +21,7 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
+public class FluentWait implements org.openqa.selenium.support.ui.Wait<WebDriver> {
 
     private org.openqa.selenium.support.ui.FluentWait wait;
     private Search search;
@@ -89,7 +89,7 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
         return new FluentWaitPageMatcher(wait, driver, page);
     }
 
-    public <V> V until(com.google.common.base.Function<? super Fluent, V> isTrue) {
+    public <V> V until(com.google.common.base.Function<? super WebDriver, V> isTrue) {
         return (V) wait.until(isTrue);
     }
 }
