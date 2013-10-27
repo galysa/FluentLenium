@@ -29,17 +29,17 @@ import static org.fluentlenium.core.wait.WaitMessage.isPageLoaded;
 
 public class FluentWaitPageMatcher {
     private List<Filter> filters = new ArrayList<Filter>();
-    private FluentWait wait;
+    private FluentWait<WebDriver> wait;
     private WebDriver webDriver;
     private FluentPage page;
 
-    public FluentWaitPageMatcher(FluentWait wait, WebDriver driver) {
+    public FluentWaitPageMatcher(FluentWait<WebDriver> wait, WebDriver driver) {
         this.wait = wait;
         this.webDriver = driver;
     }
 
 
-    public FluentWaitPageMatcher(FluentWait wait, WebDriver driver, FluentPage page) {
+    public FluentWaitPageMatcher(FluentWait<WebDriver> wait, WebDriver driver, FluentPage page) {
         this.wait = wait;
         this.webDriver = driver;
         this.page = page;
@@ -54,7 +54,7 @@ public class FluentWaitPageMatcher {
         if (!(webDriver instanceof JavascriptExecutor)) {
             throw new UnsupportedOperationException("Driver must support javascript execution to use this feature");
         } else {
-            Predicate isLoaded = new com.google.common.base.Predicate<WebDriver>() {
+            Predicate<WebDriver> isLoaded = new com.google.common.base.Predicate<WebDriver>() {
                 public boolean apply( WebDriver webDriver) {
                     JavascriptExecutor javascriptExecutor = (JavascriptExecutor) webDriver;
                     Object result = javascriptExecutor.executeScript("if (document.readyState) return document.readyState;");
@@ -79,7 +79,7 @@ public class FluentWaitPageMatcher {
         if (page == null){
             throw new IllegalArgumentException("You should use a page argument when you call the untilPage method to specify the page you want to be. Example : await().untilPage(myPage).isAt();");
         }
-        Predicate isLoaded = new com.google.common.base.Predicate<WebDriver>() {
+        Predicate<WebDriver> isLoaded = new com.google.common.base.Predicate<WebDriver>() {
             public boolean apply( WebDriver webDriver) {
                 try {
                     page.isAt();

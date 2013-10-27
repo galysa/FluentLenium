@@ -14,25 +14,24 @@
 package org.fluentlenium.core.wait;
 
 
-import org.fluentlenium.core.Fluent;
+import java.util.concurrent.TimeUnit;
+
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.search.Search;
 import org.openqa.selenium.WebDriver;
 
-import java.util.concurrent.TimeUnit;
-
 public class FluentWait implements org.openqa.selenium.support.ui.Wait<WebDriver> {
 
-    private org.openqa.selenium.support.ui.FluentWait wait;
+    private org.openqa.selenium.support.ui.FluentWait<WebDriver> wait;
     private Search search;
     private WebDriver driver;
 
-    public org.openqa.selenium.support.ui.FluentWait getWait() {
+    public org.openqa.selenium.support.ui.FluentWait<WebDriver> getWait() {
         return wait;
     }
 
     public FluentWait(WebDriver driver, Search search) {
-        wait = new org.openqa.selenium.support.ui.FluentWait(driver);
+        wait = new org.openqa.selenium.support.ui.FluentWait<WebDriver>(driver);
         this.search = search;
         this.driver = driver;
     }
@@ -72,7 +71,7 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<WebDriver
 
     }
 
-    public FluentWait until(com.google.common.base.Predicate isTrue) {
+    public FluentWait until(com.google.common.base.Predicate<WebDriver> isTrue) {
         wait.until(isTrue);
         return this;
     }
@@ -80,7 +79,6 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<WebDriver
     public FluentWaitMatcher until(String string) {
         return new FluentWaitMatcher(search, wait, string);
     }
-
     public FluentWaitPageMatcher untilPage() {
         return new FluentWaitPageMatcher(wait, driver);
     }

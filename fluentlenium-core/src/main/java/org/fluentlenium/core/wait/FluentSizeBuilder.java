@@ -27,11 +27,11 @@ import static org.fluentlenium.core.wait.WaitMessage.*;
 public class FluentSizeBuilder {
 
     private String selector;
-    private FluentWait wait;
+    private FluentWait<WebDriver> wait;
     private Search search;
     private List<Filter> filters = new ArrayList<Filter>();
 
-    public FluentSizeBuilder(Search search, FluentWait fluentWait, String selector, List<Filter> filters) {
+    public FluentSizeBuilder(Search search, FluentWait<WebDriver> fluentWait, String selector, List<Filter> filters) {
         this.selector = selector;
         this.wait = fluentWait;
         this.search = search;
@@ -44,7 +44,7 @@ public class FluentSizeBuilder {
      * @param size
      */
     public void equalTo(final int size) {
-        Predicate isPresent = new com.google.common.base.Predicate<WebDriver>() {
+        Predicate<WebDriver> isPresent = new com.google.common.base.Predicate<WebDriver>() {
             public boolean apply( WebDriver webDriver) {
                 return getSize() == size;
             }
@@ -58,7 +58,7 @@ public class FluentSizeBuilder {
      * @param size
      */
     public void notEqualTo(final int size) {
-        Predicate isPresent = new com.google.common.base.Predicate<WebDriver>() {
+        Predicate<WebDriver> isPresent = new com.google.common.base.Predicate<WebDriver>() {
             public boolean apply( WebDriver webDriver) {
                 return getSize() != size;
             }
@@ -72,7 +72,7 @@ public class FluentSizeBuilder {
      * @param size
      */
     public void lessThan(final int size) {
-        Predicate isPresent = new com.google.common.base.Predicate<WebDriver>() {
+        Predicate<WebDriver> isPresent = new com.google.common.base.Predicate<WebDriver>() {
             public boolean apply( WebDriver webDriver) {
                 return getSize() < size;
             }
@@ -86,7 +86,7 @@ public class FluentSizeBuilder {
      * @param size
      */
     public void lessThanOrEqualTo(final int size) {
-        Predicate isPresent = new com.google.common.base.Predicate<WebDriver>() {
+        Predicate<WebDriver> isPresent = new com.google.common.base.Predicate<WebDriver>() {
             public boolean apply( WebDriver webDriver) {
                 return getSize() <= size;
             }
@@ -100,7 +100,7 @@ public class FluentSizeBuilder {
      * @param size
      */
     public void greaterThan(final int size) {
-        Predicate isPresent = new com.google.common.base.Predicate<WebDriver>() {
+        Predicate<WebDriver> isPresent = new com.google.common.base.Predicate<WebDriver>() {
             public boolean apply( WebDriver webDriver) {
                 return getSize() > size;
             }
@@ -114,7 +114,7 @@ public class FluentSizeBuilder {
      * @param size
      */
     public void greaterThanOrEqualTo(final int size) {
-        Predicate isPresent = new com.google.common.base.Predicate<WebDriver>() {
+        Predicate<WebDriver> isPresent = new com.google.common.base.Predicate<WebDriver>() {
             public boolean apply( WebDriver webDriver) {
                 return getSize() >= size;
             }
